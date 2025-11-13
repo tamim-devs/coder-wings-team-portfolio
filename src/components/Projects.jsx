@@ -30,14 +30,7 @@ const projects = [
       "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=80",
     link: "https://example.com/mern",
   },
-  {
-    title: "UI/UX Landing Page",
-    description:
-      "A stunning landing page built with React & Tailwind, focusing on smooth transitions and conversion-focused design.",
-    image:
-      "https://images.unsplash.com/photo-1602526216035-d8f0b814c8f9?auto=format&fit=crop&w=900&q=80",
-    link: "https://example.com/landing",
-  },
+  
 ];
 
 const Projects = () => {
