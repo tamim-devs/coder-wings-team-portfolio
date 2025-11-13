@@ -12,33 +12,22 @@ const Navbar = () => {
   const [open, setOpen] = useState(false)
   const navRef = useRef(null)
   const menuRef = useRef(null)
-  const tlRef = useRef(null)
   const linkRefs = useRef([])
 
   useEffect(() => {
-    // Initial navbar animation (optional)
-    gsap.from(navRef.current, { y: -30, opacity: 0, duration: 0.6, ease: 'power3.out' })
+    // Navbar small fade animation
+    gsap.from(navRef.current, { y: -20, opacity: 0, duration: 0.6, ease: 'power3.out' })
 
-    // Smooth scroll behavior globally
+    // Enable smooth scroll globally
     document.documentElement.style.scrollBehavior = 'smooth'
-
-    return () => {
-      tlRef.current && tlRef.current.kill()
-    }
   }, [])
 
-  useEffect(() => {
-    if (!tlRef.current) return
-    if (open) tlRef.current.play()
-    else tlRef.current.reverse()
-  }, [open])
-
-  const toggle = () => setOpen(v => !v)
+  const toggle = () => setOpen((v) => !v)
 
   return (
     <nav
       ref={navRef}
-      className="fixed top-0 left-0 right-0 z-[100] bg-white shadow-md"
+      className="fixed top-0 left-0 right-0 bg-white shadow-md z-50" // ✅ z-50 added (perfect balance)
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="h-16 flex items-center justify-between">
@@ -50,7 +39,7 @@ const Navbar = () => {
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-6">
-            {links.map(l => (
+            {links.map((l) => (
               <a
                 key={l.name}
                 href={l.href}
@@ -108,14 +97,14 @@ const Navbar = () => {
         ref={menuRef}
         className={`md:hidden fixed top-16 right-0 w-64 max-w-full h-[calc(100vh-4rem)] bg-white shadow-lg transform ${
           open ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'
-        } transition-all duration-300 ease-in-out z-[99]`}
+        } transition-all duration-300 ease-in-out z-40`} // ✅ kept under navbar but above page
       >
         <div className="p-6 flex flex-col gap-4">
           {links.map((l, i) => (
             <a
               key={l.name}
               href={l.href}
-              ref={el => (linkRefs.current[i] = el)}
+              ref={(el) => (linkRefs.current[i] = el)}
               onClick={() => setOpen(false)}
               className="text-gray-800 py-2 rounded hover:bg-gray-100 transition"
             >
