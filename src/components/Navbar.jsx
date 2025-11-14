@@ -9,22 +9,25 @@ const Navbar = () => {
   const goToSection = (id) => {
     setOpen(false);
 
-    // If we are NOT on homepage, navigate first
     if (location.pathname !== "/") {
       navigate("/");
 
-      // IMPORTANT: wait for page load
       setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: "smooth" });
-      }, 350);
+        const target = document.getElementById(id);
+        if (target) {
+          const offset = target.offsetTop - 70; // navbar height fix
+          window.scrollTo({ top: offset, behavior: "smooth" });
+        }
+      }, 500);
 
       return;
     }
 
-    // Already on homepage → scroll immediately
-    const element = document.getElementById(id);
-    if (element) element.scrollIntoView({ behavior: "smooth" });
+    const target = document.getElementById(id);
+    if (target) {
+      const offset = target.offsetTop - 70;
+      window.scrollTo({ top: offset, behavior: "smooth" });
+    }
   };
 
   return (
@@ -45,7 +48,7 @@ const Navbar = () => {
           <button onClick={() => goToSection("home")} className="hover:text-blue-600">Home</button>
           <button onClick={() => goToSection("about")} className="hover:text-blue-600">About</button>
           <button onClick={() => goToSection("projects")} className="hover:text-blue-600">Projects</button>
-          <button onClick={() => goToSection("contact")} className="hover:text-blue-600">Contact</button>
+         
 
           <button
             onClick={() => goToSection("contact")}
@@ -55,7 +58,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Menu Button */}
+        {/* Mobile Menu Toggle */}
         <button
           onClick={() => setOpen(!open)}
           className="md:hidden p-2 border rounded"
@@ -64,7 +67,7 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Dropdown */}
       <div
         className={`md:hidden overflow-hidden bg-white transition-all duration-300 ${
           open ? "max-h-60" : "max-h-0"
@@ -74,7 +77,6 @@ const Navbar = () => {
           <button onClick={() => goToSection("home")}>Home</button>
           <button onClick={() => goToSection("about")}>About</button>
           <button onClick={() => goToSection("projects")}>Projects</button>
-          <button onClick={() => goToSection("contact")}>Contact</button>
 
           <button
             onClick={() => goToSection("contact")}
