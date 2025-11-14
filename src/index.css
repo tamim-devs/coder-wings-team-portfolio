@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
+
+/* Remove ALL nav overrides — this was breaking the layout */
+
+nav { position: absolute !important; }
